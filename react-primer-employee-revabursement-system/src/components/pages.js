@@ -75,23 +75,24 @@ export function GetUsers() {
 
 export function GetUser() {
     const [submitted, updatesubmitted] = useState(false);
-    const [userid, updateuserid] = useState(null);
+    const [userid, updateuserid] = useState(1);
 
     if(submitted)
         return(
             <>
-                <GetUserById />
+                <GetUserById userid = {userid}/>
                 <button onClick = {() => updatesubmitted(false)}>Back</button>
             </>
         );
-    return(
-        <>
-            <label>User Id:
-                <input id = "userId" ></input>
-            </label>
-            <button onClick = {() => updatesubmitted(true)}>Submit</button>
-        </>
-    );
+    else
+        return(
+            <>
+                <label>User Id:
+                    <input id = "userId" onChange={e => updateuserid(e.target.value)}></input>
+                </label>
+                <button onClick = {() => updatesubmitted(true)}>Submit</button>
+            </>
+        );
 }
 
 export function GetForms() {
