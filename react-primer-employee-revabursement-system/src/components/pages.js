@@ -3,6 +3,12 @@ import GetAllUsers from './getallusers';
 import GetUserById from './getuser';
 import {useState, useEffect} from 'react';
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
+import RegisterUser from './registeruser';
+import LoginUser from './loginuser';
+import GetFormById from './getformbyid';
+import GetAllForms from './getallforms';
+import SubmitForm from './submitform';
+import ResolveForm from './resolveform';
 
 export function Menu() {
     return(
@@ -37,32 +43,42 @@ export function Home() {
 
 export function Login() {
     return(
-        <h1>Login</h1>
-    );
-}
-
-export function Register() {
-    return(
-        <>
+        <form method="post" onSubmit={LoginUser}>
             <label>Username:
                 <input id = "username" ></input>
             </label>
             <label>Password:
                 <input id = "password" ></input>
             </label>
-            <label>Email:
-                <input id = "email" ></input>
-            </label>
-            <label>First Name:
-                <input id = "firstname" ></input>
-            </label>
-            <label>Last Name:
-                <input id = "lastname" ></input>
-            </label>
-            <label>Authority:
-                <input id = "authority" ></input>
-            </label>
             <button>Submit</button>
+        </form>
+    );
+}
+
+export function Register() {
+    return(
+        <>
+            <form method="post" onSubmit={RegisterUser}>
+                <label>Username:
+                    <input id = "username" ></input>
+                </label>
+                <label>Password:
+                    <input id = "password" ></input>
+                </label>
+                <label>Email:
+                    <input id = "email" ></input>
+                </label>
+                <label>First Name:
+                    <input id = "firstname" ></input>
+                </label>
+                <label>Last Name:
+                    <input id = "lastname" ></input>
+                </label>
+                <label>Authority:
+                    <input id = "authority" ></input>
+                </label>
+                <button>Submit</button>
+            </form>
         </>
     );
 }
@@ -97,18 +113,72 @@ export function GetUser() {
 
 export function GetForms() {
     return(
-        <h1>Login</h1>
+        <GetAllForms/>
     );
+}
+
+export function GetForm() {
+    const [submitted, updatesubmitted] = useState(false);
+    const [formid, updateformid] = useState(1);
+
+    if(submitted)
+        return(
+            <>
+                <GetFormById formid = {formid}/>
+                <button onClick = {() => updatesubmitted(false)}>Back</button>
+            </>
+        );
+    else
+        return(
+            <>
+                <label>User Id:
+                    <input id = "formId" onChange={e => updateformid(e.target.value)}></input>
+                </label>
+                <button onClick = {() => updatesubmitted(true)}>Submit</button>
+            </>
+        );
 }
 
 export function Submit() {
     return(
-        <h1>Login</h1>
+        <>
+            <form method="post" onSubmit={SubmitForm}>
+                <label>Amount:
+                    <input id = "amount" ></input>
+                </label>
+                <label>Description:
+                    <input id = "description" ></input>
+                </label>
+                <label>Author Username:
+                    <input id = "authorUsername" ></input>
+                </label>
+                <label>Reimbursement Status:
+                    <input id = "reimbursementStatus" ></input>
+                </label>
+                <label>Reimbursement Type:
+                    <input id = "reimbursementType" ></input>
+                </label>
+                <button>Submit</button>
+            </form>
+        </>
     );
 }
 
 export function Resolve() {
     return(
-        <h1>Login</h1>
+        <>
+            <form method="post" onSubmit={ResolveForm}>
+                <label>Id:
+                    <input id = "id" ></input>
+                </label>
+                <label>Resolver Username:
+                    <input id = "resolverUsername" ></input>
+                </label>
+                <label>Reimbursement Status:
+                    <input id = "reimbursementStatus" ></input>
+                </label>
+                <button>Submit</button>
+            </form>
+        </>
     );
 }

@@ -9,7 +9,7 @@ export default function GetUserById( {userid} ) {
                 .then((response) => response.json())
                 .then(setData)
         },
-        [loading]
+        [loading, userid]
     );
     useEffect(() => updateLoading(false), [data]);
     if(data)
